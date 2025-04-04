@@ -1,0 +1,15 @@
+services:
+  blogapp:
+    build: 
+      context: .
+    hostname: blogapp
+    ports:
+      - "5000:5000"
+
+  web:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - blogapp
