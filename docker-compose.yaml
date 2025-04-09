@@ -2,14 +2,26 @@ services:
   blogapp:
     build: 
       context: .
+    image: emacodes/blogapp
+    container_name: blogapp
     hostname: blogapp
     ports:
       - "5000:5000"
+    volumes:
+      - blogapp:/usr/src/nodeapp
 
-  web:
+  blogweb:
     build:
       context: ./nginx
+    image: emacodes/blogweb
+    container_name: blogweb
     ports:
       - "80:80"
+    volumes:
+      - blogweb:/var/log/nginx
     depends_on:
       - blogapp
+
+volumes:
+  blogapp: {}
+  blogweb: {}
